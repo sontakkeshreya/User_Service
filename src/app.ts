@@ -1,9 +1,6 @@
 import express, { Request, Response } from "express";
-import { config } from "../config";
 import { logger } from "./public/logger"
-
-const port = config?.port;
-
+import { userRoutes } from "./routes/user";
 
 const app = express();
 app.use(express.json());
@@ -11,7 +8,6 @@ app.use(express.json());
 app.get('/', (req: Request, res: Response) => {
     res.send("Successfully Started the api")
 })
+userRoutes(app);
 
-app.listen(port, () => {
-    logger.info(`Server runnig at http://localhost:${port}`)
-})
+export default app;
